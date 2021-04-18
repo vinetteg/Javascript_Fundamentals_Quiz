@@ -16,7 +16,7 @@ var downloadTimer = setInterval(function () {
 //questions and functions to display questions
 var questions = [
   {
-    title: "What is Javascript?",
+    question: "What is Javascript?",
     choices: [
       "A programming language",
       "A bible scripture",
@@ -25,22 +25,27 @@ var questions = [
     answer: "A programming language",
   },
   {
-    title: "What does an array store?",
+    question: "What does an array store?",
     choices: ["Light from the sun", "Values", "A string"],
     answer: "Values",
   },
   {
-    title: "console.log() will _____ defined variables.",
+    question: "console.log() will _____ defined variables.",
     choices: ["Open", "Create", "Print"],
     answer: "Print",
   },
 ];
 
 var questionIndex = 0;
+var score = 0;
+var ulCreate = document.createElement("ul");
+var questionsDiv = document.querySelector("#container");
 
 function render(questionIndex) {
+  questionsDiv.innerHTML = "";
+  ulCreate.innerHTML = "";
   for (var i = 0; i < questions.length; i++) {
-    var userQuestion = questions[questionIndex].title;
+    var userQuestion = questions[questionIndex].question;
     var userChoices = questions[questionIndex].choices;
     questionsDiv.textContent = userQuestion;
   }
@@ -53,6 +58,24 @@ function render(questionIndex) {
     listItem.addEventListener("click", compare);
   });
   console.log(render);
+  render(questionIndex);
+
+  function compare(event) {
+    var element = event.target;
+
+    if (element.matches("li")) {
+      var create = document.createElement("div");
+      create.setAttribute("id", "create");
+
+      if (element.textContent == questions[questionIndex].answer) {
+        score++;
+        create.textContent = "Correct! " + questions[questionIndex].answer;
+      } else {
+        secondLeft = secondsLeft - penalty;
+        create.textContent = "Wrong! Please choose a different answer.";
+      }
+    }
+  }
 
   //event listeners
   startBtn.addEventListener("click", function () {
