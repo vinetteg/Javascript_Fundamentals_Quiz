@@ -1,17 +1,19 @@
-var startBtn = document.querySelector(".countdown");
+var startBtn = document.querySelector("#StartBtn");
 
 //timer
 var timeleft = 60;
-var downloadTimer = setInterval(function () {
-  if (timeleft <= 0) {
-    clearInterval(downloadTimer);
-    document.getElementById("countdown").innerHTML = "Finished";
-  } else {
-    document.getElementById("countdown").innerHTML =
-      timeleft + " seconds remaining";
-  }
-  timeleft -= 1;
-}, 1000);
+function timer() {
+  var downloadTimer = setInterval(function () {
+    if (timeleft <= 0) {
+      clearInterval(downloadTimer);
+      document.getElementById("countdown").innerHTML = "Finished";
+    } else {
+      document.getElementById("countdown").innerHTML =
+        timeleft + " seconds remaining";
+    }
+    timeleft -= 1;
+  }, 1000);
+}
 
 //questions and functions to display questions
 var questions = [
@@ -57,8 +59,6 @@ function render(questionIndex) {
     ulCreate.appendChild(listItem);
     listItem.addEventListener("click", compare);
   });
-  console.log(render);
-  render(questionIndex);
 
   function compare(event) {
     var element = event.target;
@@ -70,15 +70,21 @@ function render(questionIndex) {
       if (element.textContent == questions[questionIndex].answer) {
         score++;
         create.textContent = "Correct! " + questions[questionIndex].answer;
+        questionIndex++;
+        render(questionIndex);
       } else {
-        secondLeft = secondsLeft - penalty;
+        timeleft = timeleft - 10;
         create.textContent = "Wrong! Please choose a different answer.";
+        questionIndex++;
+        render(questionIndex);
       }
     }
   }
 
   //event listeners
-  startBtn.addEventListener("click", function () {
-    countdown();
-  });
 }
+
+startBtn.addEventListener("click", function () {
+  timer();
+  render(questionIndex);
+});
