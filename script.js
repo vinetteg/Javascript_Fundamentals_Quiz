@@ -80,11 +80,34 @@ function render(questionIndex) {
       }
     }
   }
-
-  //event listeners
 }
+
+//save input area
+
+var saveBtn = document.querySelector("#save");
+var userInitialsSpan = document.querySelector("#initials");
+
+renderLastScore();
+
+function renderLastScore() {
+  var initials = localStorage.getItem("initials");
+  userInitialsSpan.textContent = initials;
+}
+
+
+
+//event listeners
+
+saveBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  renderLastScore()
+
+
+  localStorage.setItem("initials", initials)
+
 
 startBtn.addEventListener("click", function () {
   timer();
-  render(questionIndex);
-});
+  render(questionIndex)}
+
+};
