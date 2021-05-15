@@ -4,11 +4,17 @@ Bootcamp Homework 3 - Creating a quiz
 
 ## Summary
 
-This is a click through Javascript quiz.
+This is a click through Javascript quiz. Test your Javascript knowledge by moving through each of the questions. Beat the best time and save your initials.
+
+## Technologies Used
+
+[Github](https://github.com/vinetteg/Javascript_Fundamentals_Quiz) <br>
 
 ## Portfolio Mock Up
 
-Here is a mockup of the page:
+![Quiz Image](quizimage.png)
 
-Link to application:
-[https://vinetteg.github.io/Javascript_Fundamentals_Quiz/]
+## Link To Application
+
+[Deployed Web Page](https://vinetteg.github.io/Javascript_Fundamentals_Quiz/) <br>
+[Repo](https://github.com/vinetteg/Javascript_Fundamentals_Quiz)

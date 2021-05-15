@@ -69,12 +69,10 @@ function render(questionIndex) {
 
       if (element.textContent == questions[questionIndex].answer) {
         score++;
-        create.textContent = "Correct! " + questions[questionIndex].answer;
         questionIndex++;
         render(questionIndex);
       } else {
         timeleft = timeleft - 10;
-        create.textContent = "Wrong! Please choose a different answer.";
         questionIndex++;
         render(questionIndex);
       }
@@ -82,32 +80,25 @@ function render(questionIndex) {
   }
 }
 
-//save input area
-
 var saveBtn = document.querySelector("#save");
-var userInitialsSpan = document.querySelector("#initials");
-
-renderLastScore();
 
 function renderLastScore() {
-  var initials = localStorage.getItem("initials");
-  userInitialsSpan.textContent = initials;
+  const initials = JSON.parse(localStorage.getItem("initials"));
+  console.log(initials);
+  document.querySelector("#recent-user").textContent =
+    initials.initials + " - Score: " + initials.score;
 }
 
-
-
-//event listeners
-
-saveBtn.addEventListener("click", function (event) {
-  event.preventDefault();
-  renderLastScore()
-
-
-  localStorage.setItem("initials", initials)
-
+function saveScore() {
+  var userInitialsSpan = document.querySelector("#initials").value;
+}
 
 startBtn.addEventListener("click", function () {
   timer();
-  render(questionIndex)}
+  render(questionIndex);
+});
 
-};
+saveBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  renderLastScore();
+});
